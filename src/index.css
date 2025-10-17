@@ -4,6 +4,16 @@
 
 @plugin "daisyui" {
   themes: light --default;
+}
+
+@theme {
+  --font-Poppins: "Poppins", "sans-serif";
+
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
 
   --color-pink-theme: #D72050;
   --color-yellow-theme: #FF8C47;
@@ -14,17 +24,13 @@
   --color-dark-7: #F3F3F3;
 }
 
-@theme {
-  --font-Poppins: "Poppins", "sans-serif";
-}
-
 html,
 body {
   @apply scroll-smooth;
 }
 
 body {
-  @apply bg-white font-Poppins overflow-x-hidden;
+  @apply bg-white text-dark-3 font-Poppins overflow-x-hidden;
 }
 
 h1,
@@ -38,4 +44,8 @@ h6 {
 
 p {
   @apply leading-[1.8];
+}
+
+.container {
+  @apply mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xxl:max-w-[1320px] px-3;
 }
