@@ -4,6 +4,14 @@
 
 @plugin "daisyui" {
   themes: light --default;
+
+  --color-pink-theme: #D72050;
+  --color-yellow-theme: #FF8C47;
+  --color-dark-2: #444444;
+  --color-dark-3: #706F6F;
+  --color-dark-4: #9F9F9F;
+  --color-dark-6: #9F9F9F;
+  --color-dark-7: #F3F3F3;
 }
 
 @theme {
@@ -16,7 +24,7 @@ body {
 }
 
 body {
-  @apply bg-white font-Poppins;
+  @apply bg-white font-Poppins overflow-x-hidden;
 }
 
 h1,
