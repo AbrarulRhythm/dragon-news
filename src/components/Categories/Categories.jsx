@@ -11,7 +11,7 @@ const Categories = () => {
     const categories = use(categoryPromise);
 
     return (
-        <div>
+        <div className='sticky top-5'>
             <h2 className='text-dark-2 text-xl font-semibold mb-5'>All Caterogy</h2>
             <div className='category-link grid grid-cols-1'>
                 {

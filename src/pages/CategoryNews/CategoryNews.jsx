@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import NewsCard from '../../components/NewsCard/NewsCard';
 
 const CategoryNews = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // string value
     const data = useLoaderData();
-
     const [categoryNews, setCategoryNews] = useState([]);
 
     useEffect(() => {
@@ -24,7 +24,19 @@ const CategoryNews = () => {
 
     return (
         <div>
-            <h2 className='text-dark-2 text-xl font-semibold mb-5'>Dragon News Home - {categoryNews.length}</h2>
+            <h2 className='text-dark-2 text-xl font-semibold mb-5'>Dragon News Home</h2>
+            <div className='grid grid-cols-1 gap-5'>
+                {
+                    categoryNews.map((news) => {
+                        return (
+                            <NewsCard
+                                key={news.id}
+                                news={news}
+                            ></NewsCard>
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 };

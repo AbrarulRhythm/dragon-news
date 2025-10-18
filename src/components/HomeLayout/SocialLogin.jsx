@@ -2,7 +2,7 @@ import React from 'react';
 
 const SocialLogin = () => {
     return (
-        <div>
+        <>
             <h2 className='text-dark-2 text-xl font-semibold mb-5'>Login With</h2>
             <div className='grid grid-cols-1 gap-3 mb-7'>
                 {/* Google */}
@@ -16,7 +16,7 @@ const SocialLogin = () => {
                     Login with GitHub
                 </button>
             </div>
-        </div>
+        </>
     );
 };
 
