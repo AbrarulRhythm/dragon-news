@@ -38,7 +38,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className='flex items-center space-x-2'>
-                    <img className='w-[40px] rounded-full' src={userProfile} alt='User Image' />
+                    <img className='w-[40px] h-[40px] object-cover rounded-full' src={`${user ? user.photoURL : userProfile}`} alt='User Image' />
                     {
                         user ? (
                             <button onClick={handleLogOut} className='bg-dark-2 text-white font-medium py-3 px-10 cursor-pointer'>Logout</button>

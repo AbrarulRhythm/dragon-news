@@ -1,12 +1,14 @@
 import React, { use, useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
-    const { createUser, setUser } = use(AuthContext);
+    const [error, setError] = useState();
+    const { createUser, setUser, updateUser } = use(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     // Handle Register
     const handleRegister = (event) => {
@@ -14,6 +16,12 @@ const Register = () => {
 
         const form = event.target;
         const name = form.name.value;
+        if (name.length < 5) {
+            setError('Name should be more then 5 character');
+            return;
+        } else {
+            setError('');
+        }
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
@@ -21,8 +29,16 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                setUser(user);
-                // console.log(user);
+                console.log(user);
+                updateUser({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        setUser({ ...user, displayName: name, photoURL: photo });
+                        navigate('/')
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        setUser(user);
+                    })
             })
             .catch(error => {
                 const errorMessage = error.message;
@@ -41,7 +57,10 @@ const Register = () => {
                             {/* Name */}
                             <div className='mb-4'>
                                 <label className='block text-base text-dark-2 font-medium mb-2'>Your Name</label>
-                                <input type='text' name='name' className='w-full bg-dark-7 text-dark-4 py-4 px-5 rounded-md focus:outline-0 border-2 border-transparent focus:border-pink-theme/60' placeholder='Enter your name' required />
+                                <input type='text' name='name' className={`w-full bg-dark-7 text-dark-4 py-4 px-5 rounded-md focus:outline-0 border-2 border-transparent focus:border-pink-theme/60`} placeholder='Enter your name' required />
+                                {
+                                    error && <span className='block text-sm text-red-500 font-medium mt-2'>{error}</span>
+                                }
                             </div>
                             {/* Photo URL */}
                             <div className='mb-4'>

@@ -1,12 +1,15 @@
 import React, { use, useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
+    const [error, setError] = useState('');
     const { signInUser } = use(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     // Handle Sign In
     const handleSignIn = (event) => {
@@ -20,11 +23,12 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(`${location.state ? location.state : '/'}`);
             })
             .catch(error => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorCode, errorMessage);
+                // const errorMessage = error.message;
+                setError(errorCode);
             })
     }
 
@@ -51,6 +55,12 @@ const Login = () => {
                                     </span>
                                 </div>
                             </div>
+
+                            {/* Show Error Message */}
+                            {
+                                error && <span className='block text-sm text-red-500 font-medium text-center mb-6'>{error}</span>
+                            }
+
                             {/* Submit Button */}
                             <div className='mb-6'>
                                 <button type='submit' className='w-full bg-dark-2 text-white text-base font-medium py-4 rounded-md cursor-pointer'>Login</button>
