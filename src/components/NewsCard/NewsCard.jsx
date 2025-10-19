@@ -1,9 +1,11 @@
 import React from 'react';
 import { BsBookmark, BsShare } from 'react-icons/bs';
 import { FaEye, FaStar } from 'react-icons/fa';
+import { Link } from 'react-router';
 
 const NewsCard = ({ news }) => {
     const {
+        id,
         title,
         author,
         thumbnail_url,
@@ -37,7 +39,7 @@ const NewsCard = ({ news }) => {
                         details.length > 200 ? (
                             <>
                                 {details.slice(0, 200)}...
-                                <span className='block text-yellow-theme font-semibold cursor-pointer hover:opacity-60 duration-200'>Read More</span>
+                                <Link to={`/news-details/${id}`} className='block text-yellow-theme font-semibold cursor-pointer hover:opacity-60 duration-200'>Read More</Link>
                             </>
                         ) : (
                             details
