@@ -33,6 +33,8 @@ const Login = () => {
 
     return (
         <div className='container'>
+            <title>Dragon News - Login</title>
+
             <div className='flex flex-wrap justify-center items-center -mx-3'>
                 <div className='w-full md:w-8/12 lg:w-6/12 px-3'>
                     <div className='bg-white p-6 md:p-10 lg:p-16 rounded-md'>

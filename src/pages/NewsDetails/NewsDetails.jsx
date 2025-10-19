@@ -16,6 +16,8 @@ const NewsDetails = () => {
 
     return (
         <>
+            <title>{news.title}</title>
+
             <header>
                 <Header></Header>
             </header>
