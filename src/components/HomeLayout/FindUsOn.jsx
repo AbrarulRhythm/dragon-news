@@ -8,7 +8,7 @@ const FindUsOn = () => {
     return (
         <div className='find-us-on'>
             <h2 className='text-dark-2 text-xl font-semibold mb-5'>Find Us On</h2>
-            <div className='border border-dark-6 rounded-md'>
+            <div className='border border-dark-6 rounded-md mb-5'>
                 <a className='p-6 flex items-center gap-2.5'>
                     <div className='w-[30px] h-[30px] flex justify-center items-center rounded-full bg-dark-7'>
                         <img src={fb} alt="facebook" />
