@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const SocialLogin = () => {
+    const { user } = use(AuthContext);
+
     return (
-        <>
+        <div className={`social-login ${user && 'hidden'}`}>
             <h2 className='text-dark-2 text-xl font-semibold mb-5'>Login With</h2>
             <div className='grid grid-cols-1 gap-3 mb-7'>
                 {/* Google */}
@@ -16,7 +19,7 @@ const SocialLogin = () => {
                     Login with GitHub
                 </button>
             </div>
-        </>
+        </div>
     );
 };
 
