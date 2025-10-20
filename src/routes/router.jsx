@@ -8,6 +8,7 @@ import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import NewsDetails from "../pages/NewsDetails/NewsDetails";
 import PrivateRoute from "../provider/PrivateRoute";
 import LoadingOne from "../components/LoadingEffect/LoadingOne";
+import VerifySuccess from "../pages/VerifySuccess/VerifySuccess";
 
 export const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
         loader: () => fetch('/news.json'),
         element: <PrivateRoute><NewsDetails></NewsDetails></PrivateRoute>,
         hydrateFallbackElement: <LoadingOne></LoadingOne>,
+    },
+    {
+        path: '/verify-success',
+        element: <VerifySuccess></VerifySuccess>
     },
     {
         path: '*',

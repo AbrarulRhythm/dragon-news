@@ -1,14 +1,14 @@
 import React, { use, useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
     const [error, setError] = useState();
-    const { createUser, setUser, updateUser } = use(AuthContext);
+    const { createUser, setUser, verificationEmail, updateUser, userSignOut } = use(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // Handle Register
     const handleRegister = (event) => {
@@ -29,20 +29,39 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                // console.log(user);
+                event.target.reset(); // form reste
+
+                // Update User
                 updateUser({ displayName: name, photoURL: photo })
                     .then(() => {
                         setUser({ ...user, displayName: name, photoURL: photo });
-                        navigate('/')
+                        // navigate('/')
+
+                        // Send Email Verification
+                        verificationEmail({ url: 'http://localhost:5173/verify-success' })
+                            .then(() => {
+
+                                // Sign out to prevent auto-login
+                                userSignOut()
+                                    .then(() => {
+                                        alert("✅ Registration successful! Please verify your email before login.");
+                                    })
+                                    .catch((error) => {
+                                        console.log('Sign out error:', error.message);;
+                                    })
+                            })
+                            .catch((error) => {
+                                console.log('Verification email error', error.message);
+                            })
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log('Profile update error:', error);
                         setUser(user);
-                    })
+                    });
             })
             .catch(error => {
                 const errorMessage = error.message;
-                alert(errorMessage);
+                alert('Registration error:', errorMessage);
             })
     }
 

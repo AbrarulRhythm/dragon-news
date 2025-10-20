@@ -6,7 +6,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
     const [error, setError] = useState('');
-    const { signInUser } = use(AuthContext);
+    const { signInUser, userSignOut } = use(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
@@ -22,6 +22,16 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 const user = result.user;
+                if (!user.emailVerified) {
+                    userSignOut()
+                        .then(() => {
+                            alert("❌ Please verify your email before login.");
+                        })
+                        .catch(error => {
+                            console.log(error.message);
+                        })
+                    return;
+                }
                 navigate(`${location.state ? location.state : '/'}`);
             })
             .catch(error => {
